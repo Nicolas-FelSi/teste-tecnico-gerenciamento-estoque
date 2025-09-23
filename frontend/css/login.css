@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter;
+  border: none;
+}
+
+body {
+  background-color: #F7F8F9;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+main {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.texto-acessar-conta {
+  padding: .5rem 0;
+}
+
+p, label {
+  color: #98A6BB;
+  font-size: 14px;
+}
+
+label {
+  margin-top: .5rem;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+input {
+  border: 1px solid #e1e4eb;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
+button {
+  background-color: #0EA5A4;
+  padding: .75rem;
+  border-radius: .75rem;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0b8d8d;
+  transition: all .5s;
+}
+
+.mensagem-erro {
+  background-color: #F59E0B;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  margin-top: 1rem;
+  color: #101723;
+}
+
+.texto-esqueceu-senha {
+  text-align: center;
+  margin-top: 1rem;
+}
