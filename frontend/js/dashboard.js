@@ -5,6 +5,9 @@ const userId = urlParams.get("id");
 const errors = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
+  if (!userId) {
+    window.location.href = 'login.html';
+  }
   const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/read.php", {
     method: "get",
   })
@@ -26,9 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonEdit.setAttribute("id", `editProduct${product.id}`);
     buttonEdit.setAttribute("class", "editProduct");
     const iconEdit = document.createElement("img");
-    iconEdit.src = './images/icons8-edit-16.png'
+    iconEdit.src = './images/edit.png'
     buttonEdit.style.display = "flex";
     buttonEdit.style.gap = "4px";
+    buttonEdit.style.alignItems = "center";
     buttonEdit.appendChild(iconEdit);
     buttonEdit.appendChild(document.createTextNode("Editar"));
     buttonEdit.dataset.id = product.id;
@@ -44,9 +48,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonDelete.setAttribute("id", `deleteProduct${product.id}`);
     buttonDelete.setAttribute("class", "deleteProduct");
     const iconDelete = document.createElement("img");
-    iconDelete.src = './images/icon-trash-dash-white-16.png'
+    iconDelete.src = './images/delete-white.png'
     buttonDelete.style.display = "flex";
     buttonDelete.style.gap = "4px";
+    buttonDelete.style.alignItems = "center";
     buttonDelete.appendChild(iconDelete);
     buttonDelete.appendChild(document.createTextNode("Excluir"));
     buttonDelete.dataset.id = product.id;
@@ -54,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tdAction = document.createElement("td");
     tdAction.style.display = "flex";
     tdAction.style.justifyContent = "end"
-    tdAction.style.gap = "4px"
+    tdAction.style.gap = "8px"
     tdAction.append(buttonEdit, buttonDelete);
   
     tr.append(tdName, tdQuantity, tdPrice, tdAction);
@@ -132,12 +137,13 @@ function createErrorForm(errors) {
     errorElement.textContent = error;
     errorElement.style.fontSize = "12px";
     errorElement.style.display = "flex";
+    errorElement.style.alignItems = "center";
     errorElement.style.gap = ".25rem";
     errorElement.style.backgroundColor = "#F1F5F9";
     errorElement.style.padding = ".25rem .5rem";
     errorElement.style.borderRadius = "1rem";
     const icon = document.createElement("img");
-    icon.src = './images/icons8-info-16.png'
+    icon.src = './images/info.png'
     errorElement.prepend(icon);
 
     divErrorsForm.appendChild(errorElement);

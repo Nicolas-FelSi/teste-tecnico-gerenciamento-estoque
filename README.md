@@ -35,27 +35,21 @@ O objetivo é implementar um sistema de **login de usuários** e **gerenciamento
 
 ## Estrutura de Pastas
 
-teste-tecnico-gerenciamento-estoque/
-├─ backend/
-│ ├─ public/
-│ │ └─ api/
-│ │ ├─ login.php
-│ │ ├─ logout.php
-│ │ └─ products.php
-│ ├─ app/
-│ │ ├─ Database.php
-│ │ ├─ models/
-│ │ │ ├─ User.php
-│ │ │ └─ Product.php
-│ └─ sql/
-│ ├─ schema.sql
-│ └─ seed.sql
-├─ frontend/
-│ ├─ index.html # tela de login
-│ ├─ products.html # gerenciamento de produtos
-│ ├─ css/style.css
-│ └─ js/
-│ ├─ login.js
-│ └─ products.js
-├─ README.md
-└─ .gitignore
+backend/
+├─ app/models/ - Classes OOP (Database, User, Product)
+├─ public/api/ - Endpoints da API
+│ ├─ products/
+│ │ ├─ create.php
+│ │ ├─ read.php
+│ │ ├─ update.php
+│ │ └─ delete.php
+│ └─ login.php
+└─ sql/ - Scripts SQL
+
+frontend/
+├─ css/ - Estilos (login e dashboard)
+├─ js/ - Lógica (login, dashboard, modais)
+├─ images/ - Ícones
+├─ login.html - Tela de login
+└─ dashboard.html - Tela de gerenciamento
+

@@ -38,14 +38,16 @@ h1 {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-dark);
+  display: flex;
+  align-items: center;
 }
 
 h1::before {
-  content: url("../images/icons8-box-16.png");
+  content: url("../images/box.png");
   background-color: var(--bg-secondary);
   border-radius: var(--border-radius-btn);
-  padding: 0 .25rem;
   margin-right: .5rem;
+  padding: .35rem .25rem 0 .25rem;
 }
 
 .text-account {
@@ -85,10 +87,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
 }
 
 button::before {
-  content: url("../images/icons8-enter-32.png");
+  content: url("../images/enter-white.png");
 }
 
 button:hover {

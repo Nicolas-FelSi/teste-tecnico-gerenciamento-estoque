@@ -16,9 +16,9 @@ class Product {
     return $this->pdo->lastInsertId();
   }
 
-  public function update($name,$sku,$category,$price,$quantity,$supplier,$description, $id) {
-    $stmt = $this->pdo->prepare("UPDATE produtos SET nome = ?, sku = ?,categoria = ?,preco = ?,quantidade = ?,fornecedor = ?,descricao = ? WHERE id = ?");
-    return $stmt->execute([$name,$sku,$category,$price,$quantity,$supplier,$description, $id]);
+  public function update($userId, $name,$sku,$category,$price,$quantity,$supplier,$description, $id) {
+    $stmt = $this->pdo->prepare("UPDATE produtos SET usuario_id = ?, nome = ?, sku = ?,categoria = ?,preco = ?,quantidade = ?,fornecedor = ?,descricao = ? WHERE id = ?");
+    return $stmt->execute([$userId, $name,$sku,$category,$price,$quantity,$supplier,$description, $id]);
   }
 
   public function delete($id) {
