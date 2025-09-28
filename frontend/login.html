@@ -12,20 +12,21 @@
 <body>
   <main>
     <h1>Avanti inventory management</h1>
-    <p class="texto-acessar-conta">Acesse sua conta para gerenciar o estoque</p>
+    <p class="text-account">Acesse sua conta para gerenciar o estoque</p>
     <form>
       <div>
         <label for="">Usuário</label>
-        <input type="email" placeholder="nome@empresa.com">
+        <input type="email" placeholder="nome@empresa.com" id="email">
       </div>
       <div>
         <label for="">Senha</label>
-        <input type="text" placeholder="******">
+        <input type="password" placeholder="******" id="password">
       </div>
       <button>Entrar</button>
-      <p class="mensagem-erro">Credenciais inválidas. Verifique usuário e senha.</p>
-      <p class="texto-esqueceu-senha">Esqueceu sua senha? Contate o administrador</p>
+      <p class="message-error">Credenciais inválidas. Verifique usuário e senha.</p>
+      <p class="text-forgot-password">Esqueceu sua senha? Contate o administrador</p>
     </form>
   </main>
+  <script src="./js/login.js"></script>
 </body>
 </html>

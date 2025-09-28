@@ -1,3 +1,15 @@
+:root {
+  --text-dark: #2A323D;
+  --bg-body: #F7F8F9;
+  --bg-secondary: #F1F5F9;
+  --btn-primary: #0EA5A4;
+  --text-gray: #98A6BB;
+  --border-radius: 1rem;
+  --border-radius-btn: .5rem;
+  --bg-warning: #F59E0B;
+  --bg-white: #FFFFFF;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +19,7 @@
 }
 
 body {
-  background-color: #F7F8F9;
+  background-color: var(--bg-body);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -16,23 +28,32 @@ body {
 }
 
 main {
-  background-color: #FFFFFF;
+  background-color: var(--bg-white);
   padding: 2rem;
-  border-radius: 1.5rem;
+  border-radius: var(--border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
 }
 
 h1 {
   font-size: 1.5rem;
   font-weight: 600;
+  color: var(--text-dark);
 }
 
-.texto-acessar-conta {
+h1::before {
+  content: url("../images/icons8-box-16.png");
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-btn);
+  padding: 0 .25rem;
+  margin-right: .5rem;
+}
+
+.text-account {
   padding: .5rem 0;
 }
 
 p, label {
-  color: #98A6BB;
+  color: var(--text-gray);
   font-size: 14px;
 }
 
@@ -49,34 +70,42 @@ form > div {
 input {
   border: 1px solid #e1e4eb;
   padding: .5rem;
-  border-radius: .5rem;
+  border-radius: var(--border-radius-btn);
 }
 
 button {
-  background-color: #0EA5A4;
-  padding: .75rem;
-  border-radius: .75rem;
+  background-color: var(--btn-primary);
+  padding: .25rem;
+  border-radius: var(--border-radius-btn);
   color: white;
   font-weight: 600;
   width: 100%;
   margin-top: 1rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button::before {
+  content: url("../images/icons8-enter-32.png");
 }
 
 button:hover {
-  background-color: #0b8d8d;
+  background-color: #137c7c;
   transition: all .5s;
 }
 
-.mensagem-erro {
-  background-color: #F59E0B;
+.message-error {
+  background-color: var(--bg-warning);
   padding: .5rem 1rem;
-  border-radius: .5rem;
+  border-radius: var(--border-radius-btn);
   margin-top: 1rem;
-  color: #101723;
+  color: var(--text-dark);
+  display: none;
 }
 
-.texto-esqueceu-senha {
+.text-forgot-password {
   text-align: center;
   margin-top: 1rem;
 }
