@@ -115,11 +115,11 @@ table {
   font-weight: 600;
 }
 
-tbody tr:nth-child(odd) {
+tbody tr:nth-child(even) {
   background-color: var(--bg-white);
 }
 
-tbody tr:nth-child(even) {
+tbody tr:nth-child(odd) {
   background-color: var(--bg-body);
 }
 
@@ -170,6 +170,8 @@ td {
   background-color: var(--bg-white);
   padding: 1rem;
   border-radius: var(--border-radius);
+  width: 600px;
+  margin: 1rem;
 }
 
 .modal-content header {
@@ -209,6 +211,7 @@ td {
 .div-inputs {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .modal-content label {
@@ -270,13 +273,6 @@ footer {
   border-radius: var(--border-radius-btn);
 }
 
-footer div button[type=submit] {
-  padding: .5rem 1rem;
-  background-color: var(--btn-primary);
-  color: var(--text-white);
-  border-radius: var(--border-radius-btn);
-}
-
 /* Estilos do modal de adicionar produto */
 #modalAddProduct h3::before {
   content: url("../images/box-add.png");
@@ -285,7 +281,11 @@ footer div button[type=submit] {
 #modalAddProduct button[type=submit] {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: .25rem;
+  background-color: var(--btn-primary);
+  color: var(--text-white);
+  padding: .25rem .75rem;
+  border-radius: var(--border-radius-btn);
 }
 
 #modalAddProduct button[type=submit]::before {
@@ -295,6 +295,8 @@ footer div button[type=submit] {
 .form-separate-inputs {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
 }
 
 /* Estilos do modal de editar produto */
@@ -315,19 +317,43 @@ footer div button[type=submit] {
   padding-right: 1rem;
 }
 
-#modalEditProduct footer div button {
+#modalEditProduct .modal-btn-cancel {
+  background-color: transparent;
+  border: 1px solid rgb(241, 241, 241);
+  color: var(--text-gray);
+}
+
+#modalEditProduct button[type=submit] {
   display: flex;
-  justify-content: end;
-  gap: 8px;
-  padding-right: 1rem;
+  align-items: center;
+  gap: .25rem;
+  background-color: var(--btn-primary);
+  color: var(--text-white);
+  padding: .25rem .75rem;
+  border-radius: var(--border-radius-btn);
+}
+
+#modalEditProduct button[type=submit]::before {
+  content: url("../images/check.png");
 }
 
 /* Estilos do modal de excluir produto */
+#modalDeleteProduct h3::before {
+  content: url("../images/delete-dark.png");
+}
+
+#modalDeleteProduct .close-btn-modal {
+  background-color: transparent;
+  border: 1px solid rgb(241, 241, 241);
+  color: var(--text-gray);
+  font-weight: 400;
+}
+
 .text-warning {
   background-color: var(--bg-secondary);
   padding: .5rem;
   border-radius: var(--border-radius-btn);
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 12px;
 }
 
@@ -335,11 +361,56 @@ footer div button[type=submit] {
   background-color: var(--bg-danger);
   color: var(--text-white);
   border-radius: var(--border-radius);
-  padding: .25rem;
+  padding: .15rem .5rem;
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.small-warning-text::before {
+  content: url("../images/warning.png");
+  margin-top: 4px;
 }
 
 .btn-delete-product {
   background-color: var(--bg-danger);
   color: var(--text-white);
+}
+
+#modalDeleteProduct footer > div {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between  ;
+}
+
+#modalDeleteProduct button[type=submit] {
+  padding: .25rem 1rem;
+  background-color: var(--bg-danger);
+  border-radius: var(--border-radius-btn);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.div-datas-delete {
+  display: flex;
+  gap: 5rem;
+}
+
+.div-separate-data {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.div-separate-data p {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#modalDeleteProduct button[type=submit]::before {
+  content: url("../images/delete-white.png");
 }

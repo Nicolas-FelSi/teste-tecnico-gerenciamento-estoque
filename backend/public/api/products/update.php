@@ -32,7 +32,6 @@ if ($result) {
   echo json_encode([
     'success'=>true, 
     'message'=> 'Produto atualizado com sucesso.',
-    'data'=>$result
   ], JSON_UNESCAPED_UNICODE);
   exit;
 } else {

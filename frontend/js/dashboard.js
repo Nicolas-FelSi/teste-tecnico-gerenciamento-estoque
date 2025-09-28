@@ -1,4 +1,6 @@
-const form = document.querySelector("#modalAddProduct form");
+const addProductForm = document.querySelector("#modalAddProduct form");
+const editProductForm = document.querySelector("#modalEditProduct form");
+const deleteProductForm = document.querySelector("#modalDeleteProduct form");
 const tbody = document.querySelector("tbody");
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get("id");
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     tdQuantity.textContent = product.quantidade;
   
     const tdPrice = document.createElement("td");
-    tdPrice.textContent = `R$ ${product.preco}`;
+    tdPrice.textContent = `${Number(product.preco).toLocaleString('pt-br',{style:'currency',currency:'BRL'})}`;
   
     const buttonEdit = document.createElement("button");
     buttonEdit.setAttribute("id", `editProduct${product.id}`);
@@ -55,6 +57,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonDelete.appendChild(iconDelete);
     buttonDelete.appendChild(document.createTextNode("Excluir"));
     buttonDelete.dataset.id = product.id;
+    buttonDelete.dataset.name = product.nome;
+    buttonDelete.dataset.sku = product.sku;
+    buttonDelete.dataset.price = product.preco;
+    buttonDelete.dataset.quantity = product.quantidade;
   
     const tdAction = document.createElement("td");
     tdAction.style.display = "flex";
@@ -67,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   })
 })
 
-form.addEventListener("submit", async (e) => {
+addProductForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const productName = document.getElementById("name").value || "";
   const sku = document.getElementById("sku").value || "";
@@ -98,6 +104,60 @@ form.addEventListener("submit", async (e) => {
       quantity,
       supplier,
       description
+    })
+  })
+})
+
+editProductForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById("edit-id").value || "";
+  const productName = document.getElementById("edit-name").value || "";
+  const sku = document.getElementById("edit-sku").value || "";
+  const category = document.getElementById("edit-category").value || "";
+  const price = document.getElementById("edit-price").valueAsNumber;
+  const quantity = document.getElementById("edit-quantity").valueAsNumber;
+  const supplier = document.getElementById("edit-supplier").value || "";
+  const description = document.getElementById("edit-description").value || "";
+  
+  validationForm(productName, sku, category, price, quantity, supplier);
+
+  if (errors.length > 0) {
+    createErrorForm(errors);
+    return;
+  }
+
+  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/update.php", {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id,
+      productName,
+      userId,
+      sku,
+      category,
+      price,
+      quantity,
+      supplier,
+      description
+    })
+  })
+})
+
+deleteProductForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById("delete-id").value || "";
+  
+  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/delete.php", {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id,
     })
   })
 })

@@ -12,7 +12,7 @@
 <body>
   <header class="header-page">
     <h1>Avanti inventory management</h1>
-    <img class="button-menu" src="./images/icons8-menu-32.png" alt="">
+    <img class="button-menu" src="./images/menu.png" alt="">
     <div class="header-nav">
       <p>Conectado</p>
       <p>Sair</p>
@@ -112,6 +112,7 @@
       </header>
       <form>
         <div class="form-content">
+          <input type="hidden" id="edit-id">
           <div class="div-inputs">
             <label for="edit-name">Nome do produto*</label>
             <input id="edit-name" type="text" placeholder="Ex.: Camiseta Básica Avanti">
@@ -173,26 +174,35 @@
         <p class="text-warning">Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.</p>
       </div>
       <form>
-        <div>
-          <label>Produto</label>
-          <p id="delete-name"></p>
-        </div>
-        <div>
-          <label>SKU</label>
-          <p id="delete-sku"></p>
-        </div>
-        <div>
-          <label>Quantidade em Estoque</label>
-          <p id="delete-quantity"></p>
-        </div>
-        <div>
-          <label>Preço</label>
-          <p id="delete-price"></p>
+        <input type="hidden" id="delete-id">
+        <div class="div-datas-delete">
+          <div class="div-separate-data">
+            <div>
+              <label>Produto</label>
+              <p id="delete-name"></p>
+            </div>
+            <div>
+              <label>Estoque</label>
+              <p id="delete-quantity"></p>
+            </div>
+          </div>
+          <div class="div-separate-data">
+            <div>
+              <label>SKU</label>
+              <p id="delete-sku"></p>
+            </div>
+            <div>
+              <label>Preço</label>
+              <p id="delete-price"></p>
+            </div>
+          </div>
         </div>
         <p class="small-warning-text">Ação permanente</p>
         <footer>
-          <button class="modal-btn-cancel">Cancelar</button>
-          <button type="submit" class="btn-delete-product">Excluir Produto</button>
+          <div>
+            <button class="modal-btn-cancel">Cancelar</button>
+            <button type="submit" class="btn-delete-product">Excluir Produto</button>
+          </div>
         </footer>
       </form>
     </div>

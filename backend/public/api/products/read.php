@@ -24,7 +24,7 @@ if ($result) {
   ], JSON_UNESCAPED_UNICODE);
   exit;
 } else {
-  http_response_code(400);
+  http_response_code(404);
   echo json_encode(['success'=>false, 'message'=> 'Erro ao listar produtos do estoque.'], JSON_UNESCAPED_UNICODE);
   exit;
 }

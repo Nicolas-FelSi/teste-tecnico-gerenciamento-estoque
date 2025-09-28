@@ -73,11 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const delBtn = e.target.closest(".deleteProduct");
     if (delBtn) {
-      const id = delBtn.dataset.id ?? "";
-      const name = delBtn.dataset.name ?? delBtn.closest("tr")?.querySelector("td")?.textContent?.trim() ?? "";
-      const sku = delBtn.dataset.sku ?? "";
-      const quantity = delBtn.dataset.quantity ?? "";
-      const price = delBtn.dataset.price ?? "";
+      const id = delBtn.dataset.id;
+      const name = delBtn.dataset.name;
+      const sku = delBtn.dataset.sku;
+      const quantity = delBtn.dataset.quantity;
+      const price = delBtn.dataset.price;
 
       const deleteId = document.getElementById("delete-id");
       const deleteName = document.getElementById("delete-name");
@@ -89,16 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteId.value = id ?? "";
       }
       if (deleteName) {
-        deleteName.textContent = name;
+        deleteName.textContent = name ?? "";
       }
       if (deleteSku) {
-        deleteSku.textContent = sku;
+        deleteSku.textContent = sku ?? "";
       }
       if (deleteQuantity) {
-        deleteQuantity.textContent = quantity;
+        deleteQuantity.textContent = `${quantity} unidades`?? "";
       }
       if (deletePrice) {
-        deletePrice.textContent = price;
+        deletePrice.textContent = `${Number(price).toLocaleString('pt-br',{style:'currency', currency:'BRL'})}` ?? "";
       }
 
       modalDeleteProduct.style.display = "flex";
