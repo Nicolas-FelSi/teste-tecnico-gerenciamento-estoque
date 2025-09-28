@@ -12,7 +12,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/read.php", {
     method: "get",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" }
   })
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      window.location.href = "login.html";
+    }
+  }
 
   const products = await response.json();
 
@@ -28,13 +36,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     tdPrice.textContent = `${Number(product.preco).toLocaleString('pt-br',{style:'currency',currency:'BRL'})}`;
   
     const buttonEdit = document.createElement("button");
-    buttonEdit.setAttribute("id", `editProduct${product.id}`);
+    buttonEdit.setAttribute("id", "editProduct");
     buttonEdit.setAttribute("class", "editProduct");
     const iconEdit = document.createElement("img");
     iconEdit.src = './images/edit.png'
-    buttonEdit.style.display = "flex";
-    buttonEdit.style.gap = "4px";
-    buttonEdit.style.alignItems = "center";
     buttonEdit.appendChild(iconEdit);
     buttonEdit.appendChild(document.createTextNode("Editar"));
     buttonEdit.dataset.id = product.id;
@@ -47,13 +52,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonEdit.dataset.description = product.descricao;
   
     const buttonDelete = document.createElement("button");
-    buttonDelete.setAttribute("id", `deleteProduct${product.id}`);
+    buttonDelete.setAttribute("id", `deleteProduct`);
     buttonDelete.setAttribute("class", "deleteProduct");
     const iconDelete = document.createElement("img");
     iconDelete.src = './images/delete-white.png'
-    buttonDelete.style.display = "flex";
-    buttonDelete.style.gap = "4px";
-    buttonDelete.style.alignItems = "center";
     buttonDelete.appendChild(iconDelete);
     buttonDelete.appendChild(document.createTextNode("Excluir"));
     buttonDelete.dataset.id = product.id;
@@ -63,9 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonDelete.dataset.quantity = product.quantidade;
   
     const tdAction = document.createElement("td");
-    tdAction.style.display = "flex";
-    tdAction.style.justifyContent = "end"
-    tdAction.style.gap = "8px"
+    tdAction.classList.add("td-action");
     tdAction.append(buttonEdit, buttonDelete);
   
     tr.append(tdName, tdQuantity, tdPrice, tdAction);
@@ -92,6 +92,7 @@ addProductForm.addEventListener("submit", async (e) => {
 
   const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/create.php", {
     method: "post",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json"
     },
@@ -106,6 +107,12 @@ addProductForm.addEventListener("submit", async (e) => {
       description
     })
   })
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      window.location.href = "login.html";
+    }
+  }
 })
 
 editProductForm.addEventListener("submit", async (e) => {
@@ -129,6 +136,7 @@ editProductForm.addEventListener("submit", async (e) => {
 
   const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/update.php", {
     method: "put",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json"
     },
@@ -144,6 +152,12 @@ editProductForm.addEventListener("submit", async (e) => {
       description
     })
   })
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      window.location.href = "login.html";
+    }
+  }
 })
 
 deleteProductForm.addEventListener("submit", async (e) => {
@@ -153,6 +167,7 @@ deleteProductForm.addEventListener("submit", async (e) => {
   
   const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/delete.php", {
     method: "delete",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json"
     },
@@ -160,6 +175,12 @@ deleteProductForm.addEventListener("submit", async (e) => {
       id,
     })
   })
+
+  if (!response.ok) {
+    if (response.status === 401) {
+      window.location.href = "login.html";
+    }
+  }
 })
 
 function validationForm(
@@ -194,14 +215,15 @@ function createErrorForm(errors) {
   
   errors.forEach(error => {
     const errorElement = document.createElement("p");
+    errorElement.classList.add("text-error-form");
     errorElement.textContent = error;
-    errorElement.style.fontSize = "12px";
-    errorElement.style.display = "flex";
-    errorElement.style.alignItems = "center";
-    errorElement.style.gap = ".25rem";
-    errorElement.style.backgroundColor = "#F1F5F9";
-    errorElement.style.padding = ".25rem .5rem";
-    errorElement.style.borderRadius = "1rem";
+    // errorElement.style.fontSize = "12px";
+    // errorElement.style.display = "flex";
+    // errorElement.style.alignItems = "center";
+    // errorElement.style.gap = ".25rem";
+    // errorElement.style.backgroundColor = "#F1F5F9";
+    // errorElement.style.padding = ".25rem .5rem";
+    // errorElement.style.borderRadius = "1rem";
     const icon = document.createElement("img");
     icon.src = './images/info.png'
     errorElement.prepend(icon);

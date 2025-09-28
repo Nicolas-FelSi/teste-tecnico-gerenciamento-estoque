@@ -1,14 +1,5 @@
 <?php
-header("Content-Type: application/json; charset=utf-8");
-header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
-header("Access-Control-Allow-Methods: DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-
-if ($_SERVER['REQUEST_METHOD'] === "OPTIONS") {
-  http_response_code(200);
-  exit;
-}
-
+require __DIR__ . "/../_init.php";
 require __DIR__ . "/../../../app/Database.php";
 require __DIR__ . "/../../../app/models/Product.php"; 
 

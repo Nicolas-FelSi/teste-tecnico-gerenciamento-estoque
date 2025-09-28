@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   tbody.addEventListener("click", (e) => {
-    const editBtn = e.target.closest(".editProduct");
+    const editBtn = e.target.closest("#editProduct");
     if (editBtn) {
       const id = editBtn.dataset.id;
       const name = editBtn.dataset.name;
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const delBtn = e.target.closest(".deleteProduct");
+    const delBtn = e.target.closest("#deleteProduct");
     if (delBtn) {
       const id = delBtn.dataset.id;
       const name = delBtn.dataset.name;

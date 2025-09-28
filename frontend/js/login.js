@@ -18,10 +18,11 @@ form.addEventListener("submit", async (e) => {
     headers: {
       "Content-Type": "application/json"
     },
+    credentials: "include",
     body: JSON.stringify({ email, password })
   })
 
-  const data = response.json();
+  const data = await response.json();
 
   if (data.success === false) {
     textError.textContent = data.message;
