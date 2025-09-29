@@ -1,3 +1,16 @@
+const buttonMenu = document.querySelector(".button-menu");
+const headerNav = document.querySelector(".header-nav");
+
+buttonMenu.addEventListener("click", () => {
+  headerNav.classList.toggle("show");
+});
+
+document.addEventListener("click", (e) => {
+  if (!headerNav.contains(e.target) && !buttonMenu.contains(e.target)) {
+    headerNav.classList.remove("show");
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const modalAddProduct = document.getElementById("modalAddProduct");
   const modalEditProduct = document.getElementById("modalEditProduct");

@@ -6,72 +6,93 @@ const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get("id");
 const errors = [];
 
-document.addEventListener("DOMContentLoaded", async () => {
-  if (!userId) {
-    window.location.href = 'login.html';
-  }
-  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/read.php", {
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/logout.php", {
     method: "get",
-    credentials: "include",
-    headers: { "Content-Type": "application/json" }
-  })
+    credentials: "include" 
+  });
 
-  if (!response.ok) {
-    if (response.status === 401) {
-      window.location.href = "login.html";
-    }
+  const data = await response.json();
+
+  if (data.success === true) {
+    window.location.href = "login.html"; 
+  } else {
+    alert("Erro ao fazer logout");
   }
+});
 
-  const products = await response.json();
+  document.addEventListener("DOMContentLoaded", async () => {
+    if (!userId) {
+      window.location.href = 'login.html';
+    }
 
-  products.data.forEach(product => {
-    const tr = document.createElement("tr");
-    const tdName = document.createElement("td");
-    tdName.textContent = product.nome;
-  
-    const tdQuantity = document.createElement("td");
-    tdQuantity.textContent = product.quantidade;
-  
-    const tdPrice = document.createElement("td");
-    tdPrice.textContent = `${Number(product.preco).toLocaleString('pt-br',{style:'currency',currency:'BRL'})}`;
-  
-    const buttonEdit = document.createElement("button");
-    buttonEdit.setAttribute("id", "editProduct");
-    buttonEdit.setAttribute("class", "editProduct");
-    const iconEdit = document.createElement("img");
-    iconEdit.src = './images/edit.png'
-    buttonEdit.appendChild(iconEdit);
-    buttonEdit.appendChild(document.createTextNode("Editar"));
-    buttonEdit.dataset.id = product.id;
-    buttonEdit.dataset.name = product.nome;
-    buttonEdit.dataset.sku = product.sku;
-    buttonEdit.dataset.category = product.categoria;
-    buttonEdit.dataset.price = product.preco;
-    buttonEdit.dataset.quantity = product.quantidade;
-    buttonEdit.dataset.supplier = product.fornecedor;
-    buttonEdit.dataset.description = product.descricao;
-  
-    const buttonDelete = document.createElement("button");
-    buttonDelete.setAttribute("id", `deleteProduct`);
-    buttonDelete.setAttribute("class", "deleteProduct");
-    const iconDelete = document.createElement("img");
-    iconDelete.src = './images/delete-white.png'
-    buttonDelete.appendChild(iconDelete);
-    buttonDelete.appendChild(document.createTextNode("Excluir"));
-    buttonDelete.dataset.id = product.id;
-    buttonDelete.dataset.name = product.nome;
-    buttonDelete.dataset.sku = product.sku;
-    buttonDelete.dataset.price = product.preco;
-    buttonDelete.dataset.quantity = product.quantidade;
-  
-    const tdAction = document.createElement("td");
-    tdAction.classList.add("td-action");
-    tdAction.append(buttonEdit, buttonDelete);
-  
-    tr.append(tdName, tdQuantity, tdPrice, tdAction);
-    tbody.appendChild(tr);
+    updateProductsTable();
   })
-})
+
+  async function updateProductsTable() {
+    const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/products/read.php", {
+      method: "get",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" }
+    })
+  
+    if (!response.ok) {
+      if (response.status === 401) {
+        window.location.href = "login.html";
+      }
+    }
+  
+    const products = await response.json();
+  
+    products.data.forEach(product => {
+      const tr = document.createElement("tr");
+      const tdName = document.createElement("td");
+      tdName.textContent = product.nome;
+    
+      const tdQuantity = document.createElement("td");
+      tdQuantity.textContent = product.quantidade;
+    
+      const tdPrice = document.createElement("td");
+      tdPrice.textContent = `${Number(product.preco).toLocaleString('pt-br',{style:'currency',currency:'BRL'})}`;
+    
+      const buttonEdit = document.createElement("button");
+      buttonEdit.setAttribute("id", "editProduct");
+      buttonEdit.setAttribute("class", "editProduct");
+      const iconEdit = document.createElement("img");
+      iconEdit.src = './images/edit.png'
+      buttonEdit.appendChild(iconEdit);
+      buttonEdit.appendChild(document.createTextNode("Editar"));
+      buttonEdit.dataset.id = product.id;
+      buttonEdit.dataset.name = product.nome;
+      buttonEdit.dataset.sku = product.sku;
+      buttonEdit.dataset.category = product.categoria;
+      buttonEdit.dataset.price = product.preco;
+      buttonEdit.dataset.quantity = product.quantidade;
+      buttonEdit.dataset.supplier = product.fornecedor;
+      buttonEdit.dataset.description = product.descricao;
+    
+      const buttonDelete = document.createElement("button");
+      buttonDelete.setAttribute("id", `deleteProduct`);
+      buttonDelete.setAttribute("class", "deleteProduct");
+      const iconDelete = document.createElement("img");
+      iconDelete.src = './images/delete-white.png'
+      buttonDelete.appendChild(iconDelete);
+      buttonDelete.appendChild(document.createTextNode("Excluir"));
+      buttonDelete.dataset.id = product.id;
+      buttonDelete.dataset.name = product.nome;
+      buttonDelete.dataset.sku = product.sku;
+      buttonDelete.dataset.price = product.preco;
+      buttonDelete.dataset.quantity = product.quantidade;
+    
+      const tdAction = document.createElement("td");
+      tdAction.classList.add("td-action");
+      tdAction.append(buttonEdit, buttonDelete);
+    
+      tr.append(tdName, tdQuantity, tdPrice, tdAction);
+      tbody.appendChild(tr);
+    })
+  }
+  
 
 addProductForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -90,7 +111,7 @@ addProductForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/create.php", {
+  const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/products/create.php", {
     method: "post",
     credentials: "include",
     headers: {
@@ -108,11 +129,16 @@ addProductForm.addEventListener("submit", async (e) => {
     })
   })
 
+  const data = response.json();
+
   if (!response.ok) {
     if (response.status === 401) {
       window.location.href = "login.html";
     }
   }
+
+  addProductToTable(); 
+  quantity.reset();
 })
 
 editProductForm.addEventListener("submit", async (e) => {
@@ -134,7 +160,7 @@ editProductForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/update.php", {
+  const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/products/update.php", {
     method: "put",
     credentials: "include",
     headers: {
@@ -158,6 +184,9 @@ editProductForm.addEventListener("submit", async (e) => {
       window.location.href = "login.html";
     }
   }
+
+  addProductToTable(); 
+  quantity.reset();
 })
 
 deleteProductForm.addEventListener("submit", async (e) => {
@@ -165,7 +194,7 @@ deleteProductForm.addEventListener("submit", async (e) => {
 
   const id = document.getElementById("delete-id").value || "";
   
-  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/delete.php", {
+  const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/products/delete.php", {
     method: "delete",
     credentials: "include",
     headers: {
@@ -181,6 +210,8 @@ deleteProductForm.addEventListener("submit", async (e) => {
       window.location.href = "login.html";
     }
   }
+
+  addProductToTable(); 
 })
 
 function validationForm(
@@ -217,13 +248,6 @@ function createErrorForm(errors) {
     const errorElement = document.createElement("p");
     errorElement.classList.add("text-error-form");
     errorElement.textContent = error;
-    // errorElement.style.fontSize = "12px";
-    // errorElement.style.display = "flex";
-    // errorElement.style.alignItems = "center";
-    // errorElement.style.gap = ".25rem";
-    // errorElement.style.backgroundColor = "#F1F5F9";
-    // errorElement.style.padding = ".25rem .5rem";
-    // errorElement.style.borderRadius = "1rem";
     const icon = document.createElement("img");
     icon.src = './images/info.png'
     errorElement.prepend(icon);

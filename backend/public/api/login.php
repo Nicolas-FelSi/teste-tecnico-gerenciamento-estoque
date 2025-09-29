@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "_init.php";
+require __DIR__ . "/../api/_cors.php";
 require __DIR__ . "/../../app/Database.php";
 require __DIR__ . "/../../app/models/User.php"; 
 

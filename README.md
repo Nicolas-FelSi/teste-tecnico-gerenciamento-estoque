@@ -53,3 +53,49 @@ frontend/
 ├─ login.html - Tela de login
 └─ dashboard.html - Tela de gerenciamento
 
+## Instalação
+
+### 1. Banco de Dados
+1. Abra o phpMyAdmin no XAMPP.  
+2. Crie um banco chamado `teste_db`.  
+3. Importe o arquivo `backend/sql/gerenciamento_estoque.sql`.  
+
+### 2. Backend (XAMPP)
+- Coloque o projeto em `C:\xampp\htdocs\`
+- Inicie **Apache** e **MySQL** no painel do XAMPP.
+- Endpoints ficam acessíveis em: http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/products/
+
+### 3. Frontend (Live Server)
+- Abra `frontend/login.html` com o Live Server.
+- O sistema rodará em algo como: http://127.0.0.1:5500/frontend/login.html
+
+> Como o frontend e backend estão em portas diferentes, foi habilitado **CORS** nos arquivos PHP.
+
+---
+
+## Usuário de Teste
+
+E-mail: admin@gmail.com
+Senha: 123456
+
+---
+
+## Segurança e Boas Práticas
+- Código organizado em **OOP** (`Database`, `User`, `Product`)
+- Queries com **Prepared Statements (PDO)**
+- Controle de sessão (`$_SESSION`)
+- *Obs.:* Neste teste, as senhas foram salvas em texto puro para simplificação.  
+  Em produção usaria `password_hash()` e `password_verify()`.
+
+---
+
+## Possíveis Melhorias
+- Utilizar `password_hash` para maior segurança
+- Adicionar upload de imagens para produtos
+- Criar paginação na listagem
+- Implementar testes automatizados
+
+---
+
+## 👨‍💻 Autor
+Nicolas Felipe da Silva – Candidato ao Estágio Innovation Class 15 – Magento

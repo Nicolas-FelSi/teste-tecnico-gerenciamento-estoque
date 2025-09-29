@@ -13,7 +13,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const response = await fetch("http://localhost/teste-tecnico-gerenciamento-estoque/backend/public/api/login.php", {
+  const response = await fetch("http://127.0.0.1/teste-tecnico-gerenciamento-estoque/backend/public/api/login.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

@@ -23,8 +23,17 @@ class User {
 
   public function logout() {
     if (session_status() !== PHP_SESSION_ACTIVE) {
-      session_start();
+        session_start();
     }
-    session_destroy();
+
+    $_SESSION = [];
+
+    $destroyed = session_destroy();
+
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 3600, '/');
+    }
+
+    return $destroyed;
   }
 }
